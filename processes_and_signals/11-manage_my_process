@@ -11,20 +11,18 @@ fi
 
 if [ $value ==  "start" ]
 then
-	nohup "$DAEMON" > /dev/null 2>&1 &
-	pid=$(ps aux | grep "manage_my_process" | grep -v grep | awk '{print $2}')
-	echo $pid > $myPath
+	nohup ./manage_my_process > /dev/null 2>&1 &
+	echo $! > /var/run/my_process.pid
 	echo "manage_my_process started"
 elif [ $value == "stop" ]
 then
-	kill -TERM "$(cat $PID_FILE)" 2>/dev/null
+	kill -TERM "$(cat $myPath)"
 	rm $myPath
 	echo "manage_my_process stopped"
 else
-	kill -TERM "$(cat $PID_FILE)" 2>/dev/null
+	kill -TERM "$(cat $myPath)" 2>/dev/null
         rm $myPath
-	nohup "$DAEMON" > /dev/null 2>&1 &
-        pid=$(ps aux | grep "manage_my_process" | grep -v grep | awk '{print $2}')
-        echo $pid > $myPath
+	nohup ./manage_my_process > /dev/null 2>&1 &
+	echo $! > /var/run/my_process.pid
 	echo "manage_my_process restarted"
 fi
