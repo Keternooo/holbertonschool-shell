@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -e /school ]
+if [ ! -e school ]
 then
 	echo "school file does not exist"
 	exit
@@ -8,7 +8,7 @@ fi
 
 echo "school file exists"
 
-if [ $(cat school | wc -m) -eq 0 ]
+if [ ! -s school ]
 then
 	echo "school file is empty"
 else
