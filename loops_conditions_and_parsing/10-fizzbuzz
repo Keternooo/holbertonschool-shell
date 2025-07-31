@@ -1,0 +1,24 @@
+#!/bin/bash
+
+i=1
+
+while [ $i -le 100 ]
+do
+	str=''
+	if [ $(($i % 3)) -eq 0 ]
+	then
+		str+='Fizz'
+	fi
+	if [ $(($i % 5)) -eq 0 ]
+	then
+		str+='Buzz'
+	fi
+
+	if [ ${#str} -eq 0 ]
+	then
+		echo $i
+	else
+		echo $str
+	fi
+	((i++))
+done
